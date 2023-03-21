@@ -13,10 +13,12 @@ def home_view(request):
     """
 
     name = "Avinash"
-    random_id = random.randint(1,3)
+    random_id = random.randint(1,4)
     article_obj = Article.objects.get(id=random_id)
+    article_queryset = Article.objects.all()
 
     contexts = {
+        "object_list": article_queryset,
         "object":article_obj,
         "title": article_obj.title,
         "id": article_obj.id,

@@ -1,5 +1,5 @@
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -8,7 +8,7 @@ def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-        print(username, password) #remove this!
+        #print(username, password) #remove this!
 
         user = authenticate(request, username=username, password=password)
         if user is None:
@@ -17,3 +17,10 @@ def login_view(request):
         login(request, user)
         return redirect('/')
     return render(request, "accounts/login.html", {})
+
+
+def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return("/login/")
+    return render(request, "accounts/logout.html", {})
